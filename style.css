@@ -1,0 +1,559 @@
+:root {
+  --bg: #050505;
+  --red: #b71c1c;
+  --text: #eee;
+  --card: #0e0e0e;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+}
+
+html, body {
+  min-height: 100vh;
+}
+
+body {
+  background-color: #000;
+  margin: 0;
+  background-image: url("fundo.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  color: var(--text);
+}
+
+
+
+/* ===== TABS ===== */
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+
+
+
+.tab-buttons {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #000;
+
+  display: flex;        /* ESSENCIAL */
+  width: 100%;
+}
+
+.tab-btn {
+  flex: 1;              /* cada um ocupa 1/3 */
+  text-align: center;   /* centraliza o texto */
+  padding: 14px 0;
+  background: none;
+  border: none;
+  color: #777;
+}
+
+
+.tab-btn.active {
+  color: #fff;
+  border-bottom: 2px solid var(--red);
+}
+
+/* ===== PROFILE ===== */
+
+.profile-mobile {
+  padding: 16px;
+}
+
+.profile-top {
+  display: flex;
+  gap: 12px;
+}
+
+.moldura{
+  width: 40%;
+  height: 50%;
+
+  border: 2.5vw solid transparent;
+  border-image-source: url('moldura.png'); /* Caminho da imagem da borda */
+  border-image-slice: 130; /* Como a imagem será fatiada */
+  border-image-repeat: round; /* Repete a imagem para preencher a borda */
+  
+}
+
+
+
+
+
+
+
+
+
+.profile-info{
+ width: 50%;
+
+
+}
+
+.profile-info label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+
+}
+
+.profile-info input,
+.pericias-box input,
+.modal-content input,
+.modal-content textarea {
+
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--red);
+  color: white;
+}
+
+/* ===== STATUS ===== */
+
+.status-control {
+  padding: 12px 16px;
+}
+
+.stat {
+  margin-bottom: 12px;
+}
+
+.label {
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+.bar {
+  position: relative;
+  height: 36px;
+  background: #111;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+
+.bar button {
+  position: absolute;
+  top: 0;
+  width: 36px;
+  height: 100%;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  z-index: 3;
+}
+
+.bar button:first-child {
+  left: 0;
+}
+
+.bar button:last-child {
+  right: 0;
+}
+
+.value {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  z-index: 2;
+  font-weight: 600;
+
+  pointer-events: none;
+
+
+}
+
+
+.fill {
+  position: absolute;
+  inset: 0;
+  width: 0%;
+  transition: width 0.35s cubic-bezier(.4,0,.2,1);
+   z-index: 1; /* fundo */
+}
+
+.value {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  font-weight: 600;
+  z-index: 2;
+}
+
+.vida .fill { background: #5b0000; }
+.sanidade .fill { background: #FF0000; }
+.esforco .fill { background: #D26C6C; }
+
+
+/* ===== ATRIBUTOS ===== */
+
+.atributos-cris {
+  text-align: center;
+  padding-bottom: 24px;
+}
+
+.estrela-wrapper {
+  position: relative;
+  width: min(90vw, 340px);
+  aspect-ratio: 1;
+  margin: auto;
+}
+
+.estrela {
+  width: 100%;
+}
+
+.atrib {
+  position: absolute;
+  width: 22%;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.atrib span {
+  font-size: 22px;
+  font-weight: bold;
+  transition: transform .2s ease;
+}
+
+.atrib:active span {
+  transform: scale(1.15);
+}
+
+.atrib input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: none;
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  color: white;
+  outline: none;
+}
+
+
+.for { top: 31%; left: 6%; transform: translateX(-50%, -50%); }
+.agi { top: 20%; left: 50%; transform: translate(-50%, -50%); }
+.int { top: 42%; left: 82%; transform: translate(-50%, -50%); }
+
+.pre { top: 81%; left: 27%; transform: translate(-50%, -50%); }
+.vig { top: 81%; left: 73%; transform: translate(-50%, -50%); }
+
+/* remove setinhas */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.value {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  z-index: 3;
+  font-weight: 600;
+}
+
+.value input {
+  width: 42px;
+  background: transparent;
+  border: none;
+  color: white;
+  text-align: center;
+  font-weight: 600;
+  pointer-events: auto;
+}
+
+.value input {
+  width: 42px;
+  background: rgba(0,0,0,0.4);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  text-align: center;
+  font-weight: 600;
+  z-index: 3;
+}
+
+
+.value span {
+  opacity: 0.6;
+}
+
+.stats-row {
+  display: flex;
+  gap: 10px;
+}
+
+.stats-row .stat {
+  flex: 1;
+}
+
+.esforco-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.esforco-row .stat {
+  flex: 1;
+}
+
+/* ícone */
+.esforco-icon {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.esforco-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background-color: #000;
+  border-radius: 15px;
+}
+
+/* input dentro da imagem */
+.esforco-icon input {
+  position: absolute;
+  top: 44%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 32px;
+
+  background: transparent;
+  border: none;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  outline: none;
+}
+
+.pericias-box {
+  padding: 16px;
+  margin: 16px;
+
+  background: rgba(10, 10, 10, 0.75); /* preto escuro com opacidade */
+  border: 1px solid rgba(180, 0, 0, 0.6); /* mantém o vermelho, mas mais suave */
+
+  backdrop-filter: blur(4px); /* efeito vidro, opcional mas lindo */
+  -webkit-backdrop-filter: blur(4px);
+
+  border-radius: 6px;
+}
+
+
+.pericias-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.btn-novo {
+  background: var(--red);
+  border: none;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.pericias-lista {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pericia-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #333;
+  padding: 6px 0;
+}
+
+.pericia-item input {
+  width: 48px;
+  text-align: center;
+}
+
+/* MODAL */
+
+.pericias-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.pericias-modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background: #0b0b0b;
+  border: 1px solid var(--red);
+  padding: 16px;
+  width: 90%;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.pericias-opcoes {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pericias-opcoes button {
+  background: #111;
+  border: 1px solid #333;
+  color: white;
+  padding: 8px;
+  text-align: left;
+}
+
+.card-item {
+  border-bottom: 1px solid #333;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.card-info strong {
+  font-size: 15px;
+}
+
+.card-extra {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.btn-delete {
+  background: none;
+  border: none;
+  color: #ff4d4d;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.card-desc {
+  width: 95%;
+  margin-left: auto;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(180,0,0,0.4);
+  padding: 8px;
+  font-size: 13px;
+  border-radius: 4px;
+  line-height: 1.4;
+}
+
+
+textarea, select {
+  background: transparent;
+  border: 1px solid rgba(180,0,0,.6);
+  color: white;
+  padding: 6px;
+  margin-top: 4px;
+  resize: vertical;
+}
+
+textarea {
+  min-height: 80px;
+}
+
+
+textarea {
+  width: 100%;
+  background: transparent;
+  border: 1px solid rgba(180,0,0,.6);
+  color: white;
+  padding: 8px;
+  resize: vertical;
+  border-radius: 8px;
+}
+
+.descricao-box {
+  margin-top: 6px;
+  padding: 8px;
+  background: rgba(0,0,0,.4);
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+
+
+.btn-delete {
+  background: none;
+  border: none;
+  color: #ff5555;
+  font-size: 16px;
+}
+
+
+.modal-content label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+option{
+  color: #000;
+}
+
+.modal-content {
+  border-radius: 12px;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  50% { transform: translateX(6px); }
+  75% { transform: translateX(-4px); }
+  100% { transform: translateX(0); }
+}
+
+body.shake {
+  animation: shake 0.35s;
+}

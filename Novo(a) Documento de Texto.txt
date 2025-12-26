@@ -1,0 +1,450 @@
+:root {
+  --bg: #050505;
+  --red: #b71c1c;
+  --text: #eee;
+  --card: #0e0e0e;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+}
+
+body {
+  background-color: #000;
+  margin: 0;
+  background-image: url("fundo.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  color: var(--text);
+}
+
+
+
+/* ===== TABS ===== */
+
+.tab-buttons {
+  position: sticky;
+  top: 0;
+  z-index: 100; /* manda pro topo da hierarquia */
+  background: #000;
+}
+
+
+.tab-btn {
+  flex: 1;
+  padding: 14px;
+  background: none;
+  border: none;
+  color: #777;
+}
+
+.tab-btn.active {
+  color: #fff;
+  border-bottom: 2px solid var(--red);
+}
+
+/* ===== PROFILE ===== */
+
+.profile-mobile {
+  padding: 16px;
+}
+
+.profile-top {
+  display: flex;
+  gap: 12px;
+}
+
+.moldura{
+  background-color: red;
+  width: 100%;
+
+}
+
+#mold{
+  position: absolute;
+  width: 43%;
+  height: 35%;
+  top: 10%;
+  left: 4%;
+
+}
+
+#icone{
+  position: absolute;
+  width: 32%;
+  height: 32%;
+  top: 10%;
+  left: 10%;
+
+}
+
+
+
+
+
+
+
+.profile-info{
+ width: 50%;
+
+}
+
+.profile-info label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+
+}
+
+input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--red);
+  color: white;
+}
+
+/* ===== STATUS ===== */
+
+.status-control {
+  padding: 12px 16px;
+}
+
+.stat {
+  margin-bottom: 12px;
+}
+
+.label {
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+.bar {
+  position: relative;
+  height: 36px;
+  background: #111;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.bar button {
+  width: 36px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  z-index: 2;
+}
+
+.fill {
+  position: absolute;
+  inset: 0;
+  width: 0%;
+  transition: width 0.35s cubic-bezier(.4,0,.2,1);
+}
+
+.value {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  font-weight: 600;
+  z-index: 1;
+}
+
+.vida .fill { background: #5b0000; }
+.sanidade .fill { background: #FF0000; }
+.esforco .fill { background: #D26C6C; }
+
+/* ===== ATRIBUTOS ===== */
+
+.atributos-cris {
+  text-align: center;
+  padding-bottom: 24px;
+}
+
+.estrela-wrapper {
+  position: relative;
+  width: min(90vw, 340px);
+  aspect-ratio: 1;
+  margin: auto;
+}
+
+.estrela {
+  width: 100%;
+}
+
+.atrib {
+  position: absolute;
+  width: 22%;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.atrib span {
+  font-size: 22px;
+  font-weight: bold;
+  transition: transform .2s ease;
+}
+
+.atrib:active span {
+  transform: scale(1.15);
+}
+
+.for { top: 31%; left: 6%; transform: translateX(-50%, -50%); }
+.agi { top: 20%; left: 50%; transform: translate(-50%, -50%); }
+.int { top: 42%; left: 82%; transform: translate(-50%, -50%); }
+
+.pre { top: 81%; left: 27%; transform: translate(-50%, -50%); }
+.vig { top: 81%; left: 73%; transform: translate(-50%, -50%); }
+
+/* remove setinhas */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.value {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  z-index: 1;
+  font-weight: 600;
+}
+
+.value input {
+  width: 42px;
+  background: transparent;
+  border: none;
+  color: white;
+  text-align: center;
+  font-weight: 600;
+}
+
+.value span {
+  opacity: 0.6;
+}
+
+.stats-row {
+  display: flex;
+  gap: 10px;
+}
+
+.stats-row .stat {
+  flex: 1;
+}
+
+.esforco-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.esforco-row .stat {
+  flex: 1;
+}
+
+/* ícone */
+.esforco-icon {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.esforco-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background-color: #000;
+  border-radius: 15px;
+}
+
+/* input dentro da imagem */
+.esforco-icon input {
+  position: absolute;
+  top: 44%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 32px;
+
+  background: transparent;
+  border: none;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  outline: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ficha Ordem Paranormal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="tabs">
+
+  <div class="tab-buttons">
+    <button class="tab-btn active" data-tab="tab1">Personagem</button>
+    <button class="tab-btn" data-tab="tab2">Perícias</button>
+    <button class="tab-btn" data-tab="tab3">Itens</button>
+  </div>
+
+
+
+  <div class="tab-content active" id="tab1">
+
+
+
+
+    <section class="profile-mobile">
+      <div class="profile-top">
+        <div class="moldura">
+          <img src="icon.webp" id="icone" alt="">
+          <img src="moldura.png" id="mold" alt="">
+
+        </div>
+
+
+
+
+
+        <div class="profile-info">
+          <label>Nome <input type="text"></label>
+            <label>NEX
+            <div class="input-suffix">
+                <input type="number" value="20">
+                <span>%</span>
+            </div>
+            </label>
+          <label>Jogador <input type="text"></label>
+          <label>Origem <input type="text"></label>
+          <label>Classe <input type="text"></label>
+        </div>
+      </div>
+    </section>
+
+    <section class="status-control">
+
+  <div class="stats-row">
+    <!-- VIDA -->
+    <div class="stat vida">
+      <span class="label">VIDA</span>
+      <div class="bar">
+        <button onclick="changeStat('vida',-1)">−</button>
+        <div class="fill" id="vidaFill"></div>
+
+        <div class="value">
+          <input type="number" id="vidaAtual">
+          <span>/</span>
+          <input type="number" id="vidaMax">
+        </div>
+
+        <button onclick="changeStat('vida',1)">+</button>
+      </div>
+    </div>
+
+    <!-- SANIDADE -->
+    <div class="stat sanidade">
+      <span class="label">SANIDADE</span>
+      <div class="bar">
+        <button onclick="changeStat('sanidade',-1)">−</button>
+        <div class="fill" id="sanidadeFill"></div>
+
+        <div class="value">
+          <input type="number" id="sanidadeAtual">
+          <span>/</span>
+          <input type="number" id="sanidadeMax">
+        </div>
+
+        <button onclick="changeStat('sanidade',1)">+</button>
+      </div>
+    </div>
+  </div>
+
+
+      <div class="esforco-row">
+
+  <!-- ESFORÇO -->
+  <div class="stat esforco">
+    <span class="label">ESFORÇO</span>
+    <div class="bar">
+      <button onclick="changeStat('esforco',-1)">−</button>
+      <div class="fill" id="esforcoFill"></div>
+
+      <div class="value">
+        <input type="number" id="esforcoAtual">
+        <span>/</span>
+        <input type="number" id="esforcoMax">
+      </div>
+
+      <button onclick="changeStat('esforco',1)">+</button>
+    </div>
+  </div>
+
+  <!-- IMAGEM COM INPUT -->
+  <div class="esforco-icon">
+    <img src="defesa.png">
+    <input type="number" value="0">
+  </div>
+
+</div>
+
+
+    </section>
+
+    <section class="atributos-cris">
+      <h3>Atributos</h3>
+
+      <div class="estrela-wrapper">
+        <img src="estrela.png" class="estrela">
+
+        <div class="atrib for"><span>3</span></div>
+        <div class="atrib agi"><span>0</span></div>
+        <div class="atrib int"><span>1</span></div>
+        <div class="atrib pre"><span>2</span></div>
+        <div class="atrib vig"><span>5</span></div>
+      </div>
+    </section>
+
+  </div>
+
+</div>
+
+<script src="index.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+

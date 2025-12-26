@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ficha Ordem Paranormal</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+</head>
+<body>
+
+<div class="tabs">
+
+  <div class="tab-buttons">
+    <button class="tab-btn active" data-tab="tab1">Personagem</button>
+    <button class="tab-btn" data-tab="tab2">Perícias</button>
+    <button class="tab-btn" data-tab="tab3">Itens</button>
+  </div>
+
+
+
+  <div class="tab-content active" id="tab1">
+
+
+
+
+    <section class="profile-mobile">
+      <div class="profile-top">
+        <img src="icon.webp" class="moldura" id="fotoIcon" alt="">
+        <input type="file" id="uploadFoto" accept="image/*" style="display:none;">
+
+
+
+
+
+        <div class="profile-info">
+          <label>Nome <input type="text" id="nome"></label>
+            <label>NEX
+            <div class="input-suffix">
+                <input type="number" id="nex" value="">
+                <span>%</span>
+            </div>
+            </label>
+<label>Jogador
+  <input type="text" id="jogador">
+</label>
+
+<label>Origem
+  <input type="text" id="origem">
+</label>
+
+<label>Classe
+  <input type="text" id="classe">
+</label>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="status-control">
+
+  <div class="stats-row">
+    <!-- VIDA -->
+    <div class="stat vida">
+      <span class="label">VIDA</span>
+      <div class="bar">
+        <button onclick="changeStat('vida',-1)">−</button>
+        <div class="fill" id="vidaFill"></div>
+
+        <div class="value">
+          <input type="number" id="vidaAtual">
+          <span>/</span>
+          <input type="number" id="vidaMax">
+        </div>
+
+        <button onclick="changeStat('vida',1)">+</button>
+      </div>
+    </div>
+
+    <!-- SANIDADE -->
+    <div class="stat sanidade">
+      <span class="label">SANIDADE</span>
+      <div class="bar">
+        <button onclick="changeStat('sanidade',-1)">−</button>
+        <div class="fill" id="sanidadeFill"></div>
+
+        <div class="value">
+          <input type="number" id="sanidadeAtual">
+          <span>/</span>
+          <input type="number" id="sanidadeMax">
+        </div>
+
+        <button onclick="changeStat('sanidade',1)">+</button>
+      </div>
+    </div>
+  </div>
+
+
+      <div class="esforco-row">
+
+  <!-- ESFORÇO -->
+  <div class="stat esforco">
+    <span class="label">ESFORÇO</span>
+    <div class="bar">
+      <button onclick="changeStat('esforco',-1)">−</button>
+      <div class="fill" id="esforcoFill"></div>
+
+      <div class="value">
+        <input type="number" id="esforcoAtual">
+        <span>/</span>
+        <input type="number" id="esforcoMax">
+      </div>
+
+      <button onclick="changeStat('esforco',1)">+</button>
+    </div>
+  </div>
+
+  <!-- IMAGEM COM INPUT -->
+  <div class="esforco-icon">
+    <img src="defesa.png">
+    <input type="number" id="defesa" style="font-weight: bold;" value="0">
+  </div>
+
+</div>
+
+
+    </section>
+
+    <section class="atributos-cris">
+      <h3>Atributos</h3>
+
+      <div class="estrela-wrapper">
+        <img src="estrela.png" class="estrela">
+
+        <div class="atrib for">
+  <input type="number" id="for" min="0" placeholder="0">
+</div>
+
+<div class="atrib agi">
+  <input type="number" id="agi" min="0" placeholder="0">
+</div>
+
+<div class="atrib int">
+  <input type="number" id="int" min="0" placeholder="0">
+</div>
+
+<div class="atrib pre">
+  <input type="number" id="pre" min="0" placeholder="0">
+</div>
+
+<div class="atrib vig">
+  <input type="number" id="vig" min="0" placeholder="0">
+</div>
+
+      </div>
+    </section>
+
+  </div>
+  <div class="tab-content" id="tab2">
+
+  <!-- PERÍCIAS -->
+  <section class="pericias-box">
+    <div class="pericias-header">
+      <h3>Perícias</h3>
+      <button class="btn-novo" id="btnNovaPericia">+ Novo</button>
+    </div>
+    <div class="pericias-lista" id="listaPericias"></div>
+  </section>
+
+  <!-- HABILIDADES -->
+  <section class="pericias-box">
+    <div class="pericias-header">
+      <h3>Habilidades</h3>
+      <button class="btn-novo" id="btnNovaHabilidade">+ Novo</button>
+    </div>
+    <div class="pericias-lista" id="listaHabilidades"></div>
+  </section>
+
+  <!-- RITUAIS -->
+  <section class="pericias-box">
+    <div class="pericias-header">
+      <h3>Rituais</h3>
+      <button class="btn-novo" id="btnNovoRitual">+ Novo</button>
+    </div>
+    <div class="pericias-lista" id="listaRituais"></div>
+  </section>
+
+</div>
+
+
+
+<div class="tab-content" id="tab3">
+
+  <!-- ITENS -->
+  <section class="pericias-box">
+    <div class="pericias-header">
+      <h3>Itens</h3>
+      <button class="btn-novo" id="btnNovoItem">+ Novo</button>
+    </div>
+
+    <div class="pericias-lista" id="listaItens"></div>
+  </section>
+
+  <!-- ANOTAÇÕES -->
+  <section class="pericias-box">
+    <h3>Anotações</h3>
+    <textarea id="anotacoes"
+      placeholder="Anotações da missão, lore, paranoias do agente..."
+      rows="6"></textarea>
+  </section>
+
+</div>
+
+
+
+</div>
+
+
+
+<div class="pericias-modal" id="modalPericias">
+  <div class="modal-content">
+    <h3>Adicionar Perícia</h3>
+    <div class="pericias-opcoes" id="opcoesPericias"></div>
+  </div>
+</div>
+
+
+
+
+<div class="pericias-modal" id="modalHabilidade">
+  <div class="modal-content">
+    <h3>Nova Habilidade</h3>
+
+    <label>
+      Nome
+      <input type="text" id="habNome">
+    </label>
+
+    <label>
+      Descrição
+      <textarea id="habDesc"></textarea>
+    </label>
+
+    <button class="btn-novo" id="salvarHabilidade">Salvar</button>
+  </div>
+</div>
+
+
+<div class="pericias-modal" id="modalRitual">
+  <div class="modal-content">
+    <h3>Novo Ritual</h3>
+    <h5>Nome e custo de PE obrigatórios</h5>
+
+    <label>Nome <input type="text" id="ritNome"></label>
+    <label>Custo de PE <input type="number" id="ritPE"></label>
+
+    <label>
+      Execução
+      <select id="ritExec">
+        <option value="">—</option>
+        <option>Padrão</option>
+        <option>Livre</option>
+        <option>Completa</option>
+      </select>
+    </label>
+
+    <label>Alcance <input type="text" id="ritAlcance"></label>
+    <label>Alvo <input type="text" id="ritAlvo"></label>
+    <label>Duração <input type="text" id="ritDuracao"></label>
+
+    <label>
+      Descrição
+      <textarea id="ritDesc"></textarea>
+    </label>
+
+    <button class="btn-novo" id="salvarRitual">Salvar</button>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<script>
+    // Initialize Firebase
+    var config = {
+  apiKey: "AIzaSyD02xAEzWXP18NbGaF3EBJHdzknf9q7qac",
+  authDomain: "fichasordem-ce8c5.firebaseapp.com",
+  projectId: "fichasordem-ce8c5",
+  storageBucket: "fichasordem-ce8c5.appspot.com",
+  messagingSenderId: "813881076046",
+  appId: "1:813881076046:web:1c5ece0c0e2d2f7e9c161f"
+};
+
+    firebase.initializeApp(config);
+    const db = firebase.firestore();
+</script>
+
+
+<script src="index.js"></script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Escolha sua Ficha</title>
+  <style>
+    body {
+      background: #111;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+      background-image: url("fundo2.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+
+    .fichas-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .ficha-btn {
+      background: rgba(0, 0, 0, 0.7);
+      border: 2px solid red;
+      color: #fff;
+      padding: 15px;
+      width: calc(50% - 10px);
+      box-sizing: border-box;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      min-height: 80px;
+      transition: transform 0.1s, background 0.2s;
+    }
+
+    .ficha-btn:hover {
+      transform: scale(1.05);
+      background: rgba(0,0,0,0.85);
+    }
+
+    .ficha-nome {
+      font-weight: bold;
+      font-size: 1rem;
+      margin-bottom: 5px;
+    }
+
+    .ficha-classe {
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+
+    .ficha-nova {
+      font-size: 2rem;
+      line-height: 1;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+
+    @media (max-width: 480px) {
+      .ficha-btn {
+        width: 100%;
+      }
+    }
+  </style>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+</head>
+<body>
+
+  <h1>Escolha sua Ficha</h1>
+  <div class="fichas-container"></div>
+
+  <script>
+    // ===== FIREBASE CONFIG =====
+    const firebaseConfig = {
+      apiKey: "AIzaSyD02xAEzWXP18NbGaF3EBJHdzknf9q7qac",
+      authDomain: "fichasordem-ce8c5.firebaseapp.com",
+      projectId: "fichasordem-ce8c5",
+      storageBucket: "fichasordem-ce8c5.firebasestorage.app",
+      messagingSenderId: "813881076046",
+      appId: "1:813881076046:web:1c5ece0c0e2d2f7e9c161f"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // ===== CRIAR BOTÕES DAS FICHAS =====
+    const NUM_FICHAS = 10;
+    const container = document.querySelector(".fichas-container");
+
+    for (let i = 1; i <= NUM_FICHAS; i++) {
+      const fichaId = `perso${i}`;
+
+      db.collection("personagens").doc(fichaId).get().then(doc => {
+        const btn = document.createElement("button");
+        btn.className = "ficha-btn";
+
+        if (doc.exists && doc.data().nome) {
+          const data = doc.data();
+          btn.innerHTML = `
+            <div class="ficha-nome">${data.nome}</div>
+            <div class="ficha-classe">${data.classe || ""}</div>
+          `;
+        } else {
+          btn.innerHTML = `<div class="ficha-nova">+</div>`;
+        }
+
+        btn.onclick = () => {
+          // Usa "doc" como parâmetro, igual ao ficha.html
+          window.location.href = `ficha.html?doc=${fichaId}`;
+        };
+
+        container.appendChild(btn);
+      });
+    }
+  </script>
+
+</body>
+</html>
