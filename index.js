@@ -325,26 +325,48 @@ function renderPericias() {
     const div = document.createElement("div");
     div.className = "pericia-item";
 
-    div.innerHTML = `
-      <input type="text" value="${p.nome || ""}" placeholder="Nome">
-      <input type="number" value="${p.bonus || 0}" placeholder="Bônus">
-    `;
+    const nome = document.createElement("span");
+nome.innerHTML = `${p.nome} <span class="hint-press">⏳</span>`;
 
-    const [nomeInput, bonusInput] = div.querySelectorAll("input");
 
-    nomeInput.addEventListener("input", () => {
-      pericias[index].nome = nomeInput.value;
-      salvarAuto();
-    });
+    const input = document.createElement("input");
+    input.type = "number";
+    input.value = p.bonus || 0;
 
-    bonusInput.addEventListener("input", () => {
-      pericias[index].bonus = Number(bonusInput.value) || 0;
-      salvarAuto();
-    });
-
+    div.appendChild(nome);
+    div.appendChild(input);
     lista.appendChild(div);
+
+    // salvar valor
+    input.addEventListener("input", () => {
+      pericias[index].bonus = Number(input.value) || 0;
+      salvarAuto();
+    });
+
+    // ==== LONG PRESS ====
+    let timer = null;
+
+    div.addEventListener("pointerdown", (e) => {
+      // se começou no input, NÃO apaga
+      if (e.target.tagName === "INPUT") return;
+
+      timer = setTimeout(() => {
+        if (!confirm(`Apagar a perícia "${p.nome}"?`)) return;
+
+        pericias.splice(index, 1);
+        renderPericias();
+        salvarAuto();
+      }, 600);
+    });
+
+    div.addEventListener("pointerup", () => clearTimeout(timer));
+    div.addEventListener("pointerleave", () => clearTimeout(timer));
+    div.addEventListener("pointercancel", () => clearTimeout(timer));
   });
 }
+
+
+
 function renderHabilidades() {
   const lista = document.getElementById("listaHabilidades");
   lista.innerHTML = "";
@@ -450,18 +472,43 @@ function renderPericias() {
     const div = document.createElement("div");
     div.className = "pericia-item";
 
-    div.innerHTML = `
-      <span>${p.nome}</span>
-      <input type="number" value="${p.bonus || 0}">
-    `;
+    const nome = document.createElement("span");
+nome.innerHTML = `${p.nome} <span class="hint-press"></span>`;
 
-    const input = div.querySelector("input");
+
+    const input = document.createElement("input");
+    input.type = "number";
+    input.value = p.bonus || 0;
+
+    div.appendChild(nome);
+    div.appendChild(input);
+    lista.appendChild(div);
+
+    // salvar valor
     input.addEventListener("input", () => {
       pericias[index].bonus = Number(input.value) || 0;
       salvarAuto();
     });
 
-    lista.appendChild(div);
+    // ==== LONG PRESS ====
+    let timer = null;
+
+    div.addEventListener("pointerdown", (e) => {
+      // se começou no input, NÃO apaga
+      if (e.target.tagName === "INPUT") return;
+
+      timer = setTimeout(() => {
+        if (!confirm(`Apagar a perícia "${p.nome}"?`)) return;
+
+        pericias.splice(index, 1);
+        renderPericias();
+        salvarAuto();
+      }, 600);
+    });
+
+    div.addEventListener("pointerup", () => clearTimeout(timer));
+    div.addEventListener("pointerleave", () => clearTimeout(timer));
+    div.addEventListener("pointercancel", () => clearTimeout(timer));
   });
 }
 btnNovaHabilidade.addEventListener("click", () => {
